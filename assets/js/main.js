@@ -78,9 +78,10 @@
       if (event.key === 'Escape' && isOpen()) { close(true); }
     });
 
-    /* ha desktop nézetre vált a felhasználó, ne maradjon nyitva */
+    /* ha desktop nézetre vált a felhasználó, ne maradjon nyitva
+       (1080px: ezen a szélességen jelenik meg az asztali navigáció) */
     window.addEventListener('resize', function () {
-      if (isOpen() && window.innerWidth >= 1120) { close(false); }
+      if (isOpen() && window.innerWidth >= 1080) { close(false); }
     });
   }());
 
@@ -263,14 +264,17 @@
         return;
       }
 
-      /* kettős beküldés elleni védelem – konverziót itt NEM mérünk */
+      /* kettős beküldés elleni védelem – konverziót itt NEM mérünk.
+         Csak a feliratot cseréljük, hogy a gombban lévő ikon megmaradjon. */
       var submit = form.querySelector('button[type="submit"]');
       if (submit) {
+        var label = submit.querySelector('.btn__label') || submit;
+        var original = label.textContent;
         submit.disabled = true;
-        submit.textContent = 'Küldés folyamatban…';
+        label.textContent = 'Küldés folyamatban…';
         window.setTimeout(function () {
           submit.disabled = false;
-          submit.textContent = 'Ajánlatkérés elküldése';
+          label.textContent = original;
         }, 8000);
       }
     });
@@ -308,6 +312,47 @@
     if (anchor && typeof anchor.scrollIntoView === 'function') {
       anchor.scrollIntoView({ block: 'start' });
     }
+  }());
+
+  /* ==========================================================================
+     9. Fix mobil hívás sáv láthatósága
+     --------------------------------------------------------------------------
+     A sáv csak mobilon jelenik meg (ezt a CSS media query intézi), és elrejtjük,
+     amikor amúgy is takarna vagy fölösleges: nyitott mobilmenü, látható cookie
+     sáv, illetve amikor a kapcsolat szakasz már a képernyőn van.
+     A hívás lehetősége ilyenkor is elérhető marad a fejlécben és a szakaszban.
+     ========================================================================== */
+  (function callbarVisibility() {
+    var bar = doc.getElementById('callbar');
+    if (!bar) { return; }
+
+    var toggle = doc.getElementById('nav-toggle');
+    var banner = doc.getElementById('cookie-banner');
+    var contact = doc.getElementById('kapcsolat');
+    var contactVisible = false;
+
+    function update() {
+      var navOpen = !!toggle && toggle.getAttribute('aria-expanded') === 'true';
+      var cookieOpen = !!banner && !banner.hidden;
+      if (navOpen || cookieOpen || contactVisible) { bar.classList.add('is-hidden'); }
+      else { bar.classList.remove('is-hidden'); }
+    }
+
+    if (contact && 'IntersectionObserver' in window) {
+      new window.IntersectionObserver(function (entries) {
+        contactVisible = entries[0].isIntersecting;
+        update();
+      }, { rootMargin: '0px 0px -40% 0px' }).observe(contact);
+    }
+
+    /* a menü és a cookie sáv állapotát más modulok írják: attribútumra figyelünk */
+    if (typeof window.MutationObserver === 'function') {
+      var watcher = new window.MutationObserver(update);
+      if (toggle) { watcher.observe(toggle, { attributes: true, attributeFilter: ['aria-expanded'] }); }
+      if (banner) { watcher.observe(banner, { attributes: true, attributeFilter: ['hidden'] }); }
+    }
+
+    update();
   }());
 
 }());

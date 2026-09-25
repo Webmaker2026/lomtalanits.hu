@@ -29,6 +29,10 @@
     |- css/style.css
     |- js/main.js
     |- js/consent.js
+    |- fonts/                    <- Archivo variable font, SAJAT KISZOLGALAS
+    |  |- archivo-latin.woff2       (nincs Google Fonts keres: igy a betutipus
+    |  |- archivo-latin-ext.woff2    nem jelent hozzajarulas nelkuli
+    |  \- OFL.txt                    adattovabbitast harmadik fel fele)
     \- images/
        |- lomtalanits-logo.webp
        |- hero-lomtalanitas.webp
@@ -80,8 +84,8 @@
     Az index.html es koszonjuk.html <img> tagjeiben a width/height ertekek
     ehhez a merethez vannak beallitva (width="2172" height="724") — ez a CLS
     elkeruleset szolgalja. A megjelenitett magassagot a CSS allitja:
-      assets/css/style.css -> .brand img   (fejlec:  36-50 px)
-                              .footer__brand img (footer: 52 px)
+      assets/css/style.css -> .brand img         (fejlec: 52 px)
+                              .footer__brand img (footer: 48 px)
 
     HA KESOBB MAS LOGOT TOLTESZ FEL:
       - frissitsd a width/height attributumokat mind a 8 helyen
@@ -118,12 +122,14 @@
     og:image:height ertekeket is irasd at. PNG vagy JPG legyen (a WebP-t
     nem minden social platform tamogatja OG kepkent).
 
- 7) VALODI VELEMENYEK
-    index.html -> "IDE VALODI UGYFELVELEMENYEK KERULJENEK"
-    A harom placeholder kartyat valodi, ugyfeltol kapott velemennyel toltsd fel.
-    Ha nincs meg valodi velemeny, a teljes #velemenyek szekciot inkabb
-    torold ki, mint hogy placeholder szoveg lassek.
-    Kitalalt nevet, csillagszamot, ertekelest NE irj be.
+ 7) VALODI VELEMENYEK  ->  A SZEKCIO JELENLEG NINCS AZ OLDALON
+    A velemenyek szekciot a vegleges design nem tartalmazza, es placeholder
+    velemeny helyett inkabb kikerult az oldalrol.
+    Ha kesobb osszegyulnek a VALODI, ugyfeltol kapott velemenyek, akkor
+    erdemes visszatenni egy sajat szekciokent (pl. a #miert-mi es a
+    #referenciak koze), a tobbi szakasz mintajara.
+    Kitalalt nevet, csillagszamot, ertekelest NE irj be — sem a szovegbe,
+    sem aggregateRating strukturalt adatkent.
 
  8) GOOGLE ADS CONVERSION ID
     assets/js/consent.js -> LOM_ADS blokk a fajl elejen
