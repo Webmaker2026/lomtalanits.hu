@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  One-page weboldal: egyetlen indexelendő URL van.
+  A horgonyok (#szolgaltatasok, #arak, #gyik stb.) NEM külön URL-ek,
+  ezért nem szerepelnek itt. A /koszonjuk.html szándékosan kimarad
+  (noindex, follow).
+  A <lastmod> értéket élesítéskor, illetve nagyobb tartalmi módosításkor frissítsd.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://lomtalanits.hu/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

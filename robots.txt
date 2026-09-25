@@ -1,0 +1,9 @@
+# robots.txt — https://lomtalanits.hu/
+
+User-agent: *
+Allow: /
+
+# A koszonjuk.html szandekosan NEM tiltott: "noindex, follow" meta taggel van
+# ellatva, amit a keresonek latnia kell. A sitemap.xml-ben nem szerepel.
+
+Sitemap: https://lomtalanits.hu/sitemap.xml

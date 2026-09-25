@@ -1,0 +1,193 @@
+# =============================================================================
+#  lomtalanits.hu — Apache konfiguráció (shared hosting kompatibilis)
+# -----------------------------------------------------------------------------
+#  Minden modulfüggő direktíva <IfModule> blokkban van, hogy ha az adott modul
+#  nincs engedélyezve a tárhelyen, ne okozzon 500-as hibát.
+# =============================================================================
+
+# --- alap ---------------------------------------------------------------------
+DirectoryIndex index.html index.php
+
+# könyvtárlistázás tiltása
+Options -Indexes
+
+# alapértelmezett karakterkódolás
+AddDefaultCharset UTF-8
+
+<IfModule mod_mime.c>
+    AddType image/webp                  .webp
+    AddType image/avif                  .avif
+    AddType image/svg+xml               .svg
+    AddType application/manifest+json   .webmanifest
+    AddCharset UTF-8                    .html .css .js .xml .txt .json
+</IfModule>
+
+
+# =============================================================================
+#  1. HTTPS + egységes (preferált) domain
+#     Preferált változat: https://lomtalanits.hu/  (www NÉLKÜL)
+#
+#  FIGYELEM: az 1/a szabály akkor kapcsoljon be, ha az SSL tanúsítvány MÁR
+#  telepítve van. Ha a tárhelyen még nincs HTTPS, a szabály hibás
+#  átirányításhoz vezet — ilyenkor kommentezd ki (# jel a 3 sor elé), és a
+#  tanúsítvány telepítése után vedd vissza.
+#
+#  Ha a preferált változat mégis a www-s (https://www.lomtalanits.hu/), akkor
+#  az 1/b szabály helyett a nem-www -> www irányt kell beállítani, ÉS az
+#  index.html canonical + sitemap.xml + robots.txt URL-eket is át kell írni.
+# =============================================================================
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /
+
+    # 1/a. HTTPS átirányítás (proxy/load balancer mögött is működik)
+    RewriteCond %{HTTPS} !=on
+    RewriteCond %{HTTP:X-Forwarded-Proto} !https
+    RewriteCond %{HTTP:X-Forwarded-Ssl} !on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # 1/b. www eltávolítása
+    RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+    RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+    # 1/c. /index.html -> /  (egy kanonikus URL a főoldalra)
+    RewriteCond %{THE_REQUEST} \s/+index\.html[\s?] [NC]
+    RewriteRule ^index\.html$ / [R=301,L]
+</IfModule>
+
+
+# =============================================================================
+#  2. Tömörítés
+# =============================================================================
+<IfModule mod_deflate.c>
+    <IfModule mod_filter.c>
+        AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css
+        AddOutputFilterByType DEFLATE text/javascript application/javascript
+        AddOutputFilterByType DEFLATE application/x-javascript application/json
+        AddOutputFilterByType DEFLATE application/xml application/rss+xml
+        AddOutputFilterByType DEFLATE image/svg+xml application/manifest+json
+    </IfModule>
+</IfModule>
+
+<IfModule mod_brotli.c>
+    <IfModule mod_filter.c>
+        AddOutputFilterByType BROTLI_COMPRESS text/html text/plain text/xml text/css
+        AddOutputFilterByType BROTLI_COMPRESS text/javascript application/javascript
+        AddOutputFilterByType BROTLI_COMPRESS application/json image/svg+xml
+    </IfModule>
+</IfModule>
+
+
+# =============================================================================
+#  3. Statikus asset cache
+#     A HTML-t NEM cache-eljük hosszan, hogy a módosítások azonnal látszódjanak.
+# =============================================================================
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault                          "access plus 1 month"
+
+    ExpiresByType text/html                 "access plus 0 seconds"
+    ExpiresByType application/xml           "access plus 1 hour"
+    ExpiresByType text/plain                "access plus 1 hour"
+
+    ExpiresByType text/css                  "access plus 1 year"
+    ExpiresByType text/javascript           "access plus 1 year"
+    ExpiresByType application/javascript    "access plus 1 year"
+
+    # A képeknél szándékosan 30 nap, nem 1 év: ha egy munkafotót vagy a logót
+    # UGYANAZON a fájlnéven cserélik, a visszatérő látogatók ne ragadjanak be
+    # a régi verzióra. (Hosszabb cache-hez verziózott fájlnév kell.)
+    ExpiresByType image/webp                "access plus 30 days"
+    ExpiresByType image/avif                "access plus 30 days"
+    ExpiresByType image/png                 "access plus 30 days"
+    ExpiresByType image/jpeg                "access plus 30 days"
+    ExpiresByType image/svg+xml             "access plus 30 days"
+    ExpiresByType image/x-icon              "access plus 30 days"
+    ExpiresByType image/vnd.microsoft.icon  "access plus 30 days"
+    ExpiresByType font/woff2                "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+    # CSS / JS / font: hosszú cache.
+    # FONTOS: ha módosítod a style.css-t vagy a js fájlokat, a visszatérő
+    # látogatók a régi verziót láthatják. Ilyenkor a HTML-ben írd át a
+    # hivatkozást cache-busterrel, pl.:  /assets/css/style.css?v=2
+    <FilesMatch "\.(css|js|woff2?)$">
+        Header set Cache-Control "public, max-age=31536000"
+    </FilesMatch>
+
+    # Képek: rövidebb cache, hogy a lecserélt fotók biztosan megjelenjenek.
+    <FilesMatch "\.(webp|avif|png|jpe?g|gif|svg|ico)$">
+        Header set Cache-Control "public, max-age=2592000"
+    </FilesMatch>
+
+    <FilesMatch "\.(html|php)$">
+        Header set Cache-Control "no-cache, must-revalidate"
+    </FilesMatch>
+</IfModule>
+
+
+# =============================================================================
+#  4. Alap biztonsági headerek
+# =============================================================================
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=(), payment=()"
+    Header always set Cross-Origin-Opener-Policy "same-origin"
+
+    # HSTS: CSAK akkor engedd fel, ha a HTTPS már biztosan és véglegesen működik!
+    # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+    # A Google tag használata miatt szándékosan nincs élesítve CSP.
+    # Ha szükséges, alaposan teszteld, mert könnyen letilthatja a mérést:
+    # Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data: https://www.google.com https://www.googleadservices.com; script-src 'self' https://www.googletagmanager.com; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; style-src 'self'; frame-src https://td.doubleclick.net; base-uri 'self'; form-action 'self'"
+
+    Header unset X-Powered-By
+    Header always unset X-Powered-By
+</IfModule>
+
+# A ServerSignature az "Options/All" AllowOverride osztályba tartozik, ezért
+# szigorúbb shared hostingon 500-as hibát okozhat. Csak akkor engedd fel, ha
+# a tárhelyen működik:
+# ServerSignature Off
+
+
+# =============================================================================
+#  5. Érzékeny fájlok védelme
+# =============================================================================
+# rejtett fájlok (.htaccess, .git, .env stb.)
+<IfModule mod_authz_core.c>
+    <FilesMatch "^\.">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+    <FilesMatch "^\.">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+
+# élesítési dokumentáció és mentések ne legyenek publikusan elérhetők
+<IfModule mod_authz_core.c>
+    <FilesMatch "(README-FTP\.txt|\.(bak|old|log|sql|ini|sh|inc)$)">
+        Require all denied
+    </FilesMatch>
+</IfModule>
+<IfModule !mod_authz_core.c>
+    <FilesMatch "(README-FTP\.txt|\.(bak|old|log|sql|ini|sh|inc)$)">
+        Order allow,deny
+        Deny from all
+    </FilesMatch>
+</IfModule>
+
+
+# =============================================================================
+#  6. ETag
+# =============================================================================
+<IfModule mod_headers.c>
+    Header unset ETag
+</IfModule>
+FileETag None
