@@ -12,8 +12,10 @@
  FAJLSTRUKTURA
 -------------------------------------------------------------------------------
  /
- |- index.html              <- MINDEN tartalom itt van (horgonyos navigacio)
- |- koszonjuk.html          <- az EGYETLEN tovabbi HTML oldal
+ |- index.html              <- a szolgaltatasi tartalom (one-page, horgonyos)
+ |- adatkezeles.html        <- Adatkezelesi tajekoztato (kulon oldal)
+ |- cookie-tajekoztato.html <- Cookie tajekoztato (kulon oldal)
+ |- koszonjuk.html          <- koszono oldal az urlap bekuldese utan
  |- send-form.php           <- az ajanlatkero urlap feldolgozasa
  |- .htaccess               <- HTTPS, domain, cache, biztonsagi headerek
  |- robots.txt
@@ -46,7 +48,8 @@
  1) TELEFONSZAM CSEREJE
     Keress ra: TELEFONSZAM_HELYE   -> a tel: linkek erteke
     Keress ra: +36 XX XXX XXXX     -> a megjelenitett szoveg
-    Erintett fajlok: index.html, koszonjuk.html
+    Erintett fajlok: index.html, koszonjuk.html, adatkezeles.html,
+                     cookie-tajekoztato.html
     Pelda:  href="tel:TELEFONSZAM_HELYE"  ->  href="tel:+3611234567"
             +36 XX XXX XXXX               ->  +36 1 123 4567
     A tel: linkben szokoz nelkul, +36-tal kezdve add meg.
@@ -56,7 +59,8 @@
 
  2) E-MAIL CIM CSEREJE
     Keress ra: EMAIL_CIM_HELYE
-    Erintett fajlok: index.html, koszonjuk.html, send-form.php
+    Erintett fajlok: index.html, koszonjuk.html, adatkezeles.html,
+                     cookie-tajekoztato.html, send-form.php
     A send-form.php-ben: define('LOM_RECIPIENT', 'EMAIL_CIM_HELYE');
     -> ide kell a valodi fogado e-mail cim.
     Allitsd be a felado cimet is: define('LOM_SENDER', 'noreply@lomtalanits.hu');
@@ -64,8 +68,9 @@
 
  3) VALLALKOZASI ADATOK
     Keress ra: VALLALKOZAS_NEVE / SZEKHELY / ADOSZAM
-    Erintett: index.html (footer + #adatkezeles szekcio), koszonjuk.html (footer)
-    Toltsd ki tovabba az adatkezelesi reszben:
+    Erintett: adatkezeles.html (1. pont + footer), index.html (footer),
+              koszonjuk.html (footer), cookie-tajekoztato.html (footer)
+    Toltsd ki tovabba az adatkezeles.html-ben:
       TARHELYSZOLGALTATO_NEVE_ES_SZEKHELYE
       MEGORZESI_IDO
       DATUM (a tajekoztato utolso modositasa)
@@ -79,8 +84,9 @@
                               .footer__brand img (footer: 52 px)
 
     HA KESOBB MAS LOGOT TOLTESZ FEL:
-      - frissitsd a width/height attributumokat mind a 4 helyen
-        (index.html fejlec + footer, koszonjuk.html fejlec + footer),
+      - frissitsd a width/height attributumokat mind a 8 helyen
+        (index.html, koszonjuk.html, adatkezeles.html es
+        cookie-tajekoztato.html — mindegyikben fejlec + footer),
       - ha az aranya jelentosen mas, allitsd at a fenti CSS magassagokat.
 
     TELJESITMENY (nem kotelezo, de javasolt):
@@ -171,13 +177,13 @@
     analytics_storage.
 
 17) COOKIE BEALLITASOK
-    A footerben es a jogi szekciokban levo "Cookie-beallitasok" gombra
+    A footerben es a jogi oldalakon levo "Cookie-beallitasok" gombra
     ujra nyiljon meg a panel (nem kell kezzel localStorage-t torolni).
     A dontes a localStorage "lom_consent_v1" kulcsban tarolodik.
     Visszatero latogatonal a banner ne jelenjen meg ujra.
 
 18) ADATKEZELESI SZOVEG VEGLEGESITESE
-    index.html -> #adatkezeles
+    adatkezeles.html (a cookie-specifikus resz: cookie-tajekoztato.html)
     A sablon szoveget a tenyleges mukodeshez kell igazitani (adatkezelo,
     megorzesi ido, adatfeldolgozok, tarhelyszolgaltato).
     A sablon onmagaban NEM garantalja a jogi megfeleloseget.
@@ -199,7 +205,8 @@
 
 21) SITEMAP
     https://lomtalanits.hu/sitemap.xml elerheto legyen.
-    Csak a fooldal (/) szerepel benne. A koszonjuk.html NEM.
+    A fooldal (/), az adatkezeles.html es a cookie-tajekoztato.html
+    szerepel benne. A koszonjuk.html NEM (noindex).
     Frissitsd a <lastmod> datumot elesiteskor.
     Kuldd be: Google Search Console > Sitemapek.
 
@@ -248,7 +255,8 @@
    assets/css/style.css  vagy  assets/js/main.js  vagy  assets/js/consent.js
  fajlt, a visszatero latogatok meg a regi verziot kaphatjak.
 
- Megoldas: irj at a hivatkozast az index.html es koszonjuk.html-ben
+ Megoldas: irj at a hivatkozast MIND A NEGY HTML oldalon (index.html,
+ koszonjuk.html, adatkezeles.html, cookie-tajekoztato.html)
  egy verzio-parameterrel, pl.:
    <link rel="stylesheet" href="/assets/css/style.css?v=2">
    <script src="/assets/js/consent.js?v=2"></script>

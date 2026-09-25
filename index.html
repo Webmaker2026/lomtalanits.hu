@@ -1126,7 +1126,7 @@
               <input type="checkbox" id="f-consent" name="consent" value="1" required aria-describedby="e-consent">
               <label for="f-consent">
                 Hozzájárulok, hogy a megadott adataimat az ajánlatkérés megválaszolása céljából kezeljék.
-                Részletek: <a href="#adatkezeles">Adatkezelési tájékoztató</a>.
+                Részletek: <a href="/adatkezeles.html">Adatkezelési tájékoztató</a>.
                 <span class="req" aria-hidden="true">*</span>
               </label>
               <span class="field__error" id="e-consent"></span>
@@ -1144,245 +1144,6 @@
         </div>
       </div>
 
-    </div>
-  </section>
-
-  <!-- ========================= ADATKEZELÉSI TÁJÉKOZTATÓ ==================== -->
-  <section class="section section--soft" id="adatkezeles">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Adatkezelés</p>
-        <h2>Adatkezelési tájékoztató</h2>
-        <p>
-          Az alábbi tájékoztató a lomtalanits.hu weboldalon történő kapcsolatfelvétel és
-          mérés adatkezelését ismerteti.
-        </p>
-      </div>
-
-      <div class="legal">
-
-        <div class="callout">
-          <svg class="icon" aria-hidden="true"><use href="#i-warn"></use></svg>
-          <p>
-            <strong>Élesítés előtt kitöltendő.</strong> Az alábbi szöveg a tényleges
-            vállalkozási és adatkezelési adatokhoz igazítandó. A
-            <span class="ph">jelölt</span> helyeken valódi adat szükséges. Ez a tájékoztató
-            önmagában, sablonként nem garantálja a jogi megfelelőséget – a végleges
-            tartalmat a tényleges működéshez kell szabni.
-          </p>
-        </div>
-
-        <h3>1. Az adatkezelő</h3>
-        <dl>
-          <dt>Adatkezelő megnevezése</dt>
-          <dd><span class="ph">VALLALKOZAS_NEVE</span></dd>
-          <dt>Székhely</dt>
-          <dd><span class="ph">SZEKHELY</span></dd>
-          <dt>Adószám</dt>
-          <dd><span class="ph">ADOSZAM</span></dd>
-          <dt>Weboldal</dt>
-          <dd>https://lomtalanits.hu/</dd>
-        </dl>
-
-        <h3>2. Elérhetőség adatkezelési kérdésekben</h3>
-        <p>
-          E-mail: <a href="mailto:EMAIL_CIM_HELYE"><span class="ph">EMAIL_CIM_HELYE</span></a><br>
-          Telefon: <a href="tel:TELEFONSZAM_HELYE">+36 XX XXX XXXX</a>
-        </p>
-
-        <h3>3. Az adatkezelés célja</h3>
-        <ul>
-          <li>a weboldalon leadott ajánlatkérés megválaszolása, árajánlat adása;</li>
-          <li>a szolgáltatás egyeztetése, a munka előkészítése;</li>
-          <li>a telefonon vagy e-mailben indított kapcsolatfelvétel kezelése;</li>
-          <li>a weboldal működtetése, biztonsága és – hozzájárulás esetén – mérése.</li>
-        </ul>
-
-        <h3>4. A kezelt adatok köre</h3>
-        <table class="legal__table">
-          <thead>
-            <tr><th>Adatkezelés</th><th>Kezelt adatok</th><th>Jogalap</th><th>Megőrzési idő</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Ajánlatkérő űrlap</td>
-              <td>név, telefonszám, e-mail cím (ha megadja), település / kerület, kért munka típusa, a leírásban megadott információk</td>
-              <td>az érintett hozzájárulása (GDPR 6. cikk (1) a))</td>
-              <td><span class="ph">MEGORZESI_IDO</span> (javasolt: az ajánlatkérés lezárását követő legfeljebb 1 év, szerződéskötés esetén a jogszabályi megőrzési idő)</td>
-            </tr>
-            <tr>
-              <td>Telefonos / e-mailes kapcsolatfelvétel</td>
-              <td>név, elérhetőség, az egyeztetés tartalma</td>
-              <td>szerződés előkészítése, illetve jogos érdek (GDPR 6. cikk (1) b) és f))</td>
-              <td><span class="ph">MEGORZESI_IDO</span></td>
-            </tr>
-            <tr>
-              <td>Weboldal működése, visszaélések elleni védelem</td>
-              <td>technikailag szükséges naplóadatok a szolgáltató tárhelyén</td>
-              <td>jogos érdek (GDPR 6. cikk (1) f))</td>
-              <td>a tárhelyszolgáltató naplózási gyakorlata szerint</td>
-            </tr>
-            <tr>
-              <td>Weboldali mérés (Google Ads)</td>
-              <td>cookie-k és hasonló technológiák által kezelt azonosítók, eseményadatok</td>
-              <td>az érintett hozzájárulása (GDPR 6. cikk (1) a))</td>
-              <td>a hozzájárulás visszavonásáig, illetve a szolgáltató által beállított lejáratig</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>5. Kötelezően megadandó adatok</h3>
-        <p>
-          Az ajánlatkérő űrlapon a név, a telefonszám, a település / kerület és a kért munka
-          típusa megadása szükséges, mert ezek nélkül nem tudunk ajánlatot adni, illetve
-          visszahívni. Az e-mail cím megadása nem kötelező. Kérjük, ne adjon meg
-          különleges (pl. egészségi állapotra vonatkozó) adatot a leírásban.
-        </p>
-
-        <h3>6. Címzettek, adatfeldolgozók</h3>
-        <p>
-          Az adatokhoz az adatkezelő és a szolgáltatás teljesítésében részt vevő
-          munkatársak férnek hozzá. Adatfeldolgozók:
-        </p>
-        <ul>
-          <li><strong>Tárhelyszolgáltató:</strong> <span class="ph">TARHELYSZOLGALTATO_NEVE_ES_SZEKHELYE</span> – a weboldal és az e-mail kiszolgálása.</li>
-          <li><strong>Google Ireland Limited</strong> (Gordon House, Barrow Street, Dublin 4, Írország) – weboldali mérés és hirdetési szolgáltatás, kizárólag az Ön hozzájárulása esetén.</li>
-        </ul>
-        <p>
-          Az adatokat harmadik országba nem továbbítjuk, kivéve a Google szolgáltatásainak
-          működéséhez kapcsolódó, a szolgáltató által biztosított garanciák (pl. EU–USA
-          adatvédelmi keret, szerződéses klauzulák) mellett történő adattovábbítást.
-        </p>
-
-        <h3>7. Weboldali mérés és cookie-k</h3>
-        <p>
-          A weboldal Google Ads hirdetési kampányhoz kapcsolódó mérést használ, amely
-          kizárólag az Ön hozzájárulása alapján aktiválódik (Google Consent Mode v2).
-          Hozzájárulás nélkül a hirdetési és statisztikai célú tárolás le van tiltva.
-          A részletek a <a href="#cookie-tajekoztato">Cookie tájékoztatóban</a> olvashatók,
-          a döntés bármikor módosítható a
-          <button class="btn btn--link" type="button" data-consent-open>Cookie-beállítások</button> megnyitásával.
-        </p>
-
-        <h3>8. Az érintett jogai</h3>
-        <ul>
-          <li>tájékoztatáshoz és hozzáféréshez való jog;</li>
-          <li>helyesbítéshez való jog;</li>
-          <li>törléshez való jog („elfeledtetéshez való jog”);</li>
-          <li>az adatkezelés korlátozásához való jog;</li>
-          <li>adathordozhatósághoz való jog;</li>
-          <li>tiltakozás joga a jogos érdeken alapuló adatkezelés ellen;</li>
-          <li>a hozzájárulás bármikor, díjmentesen történő visszavonása – ez nem érinti a visszavonás előtti adatkezelés jogszerűségét.</li>
-        </ul>
-        <p>
-          Kérelmét a fenti e-mail címre vagy telefonszámra küldheti. A kérelmet
-          indokolatlan késedelem nélkül, legkésőbb egy hónapon belül megválaszoljuk.
-        </p>
-
-        <h3>9. Jogorvoslat, panasz</h3>
-        <p>
-          Ha úgy érzi, hogy adatkezelésünk jogszabályt sért, először kérjük, jelezze
-          nekünk. Panaszt tehet a Nemzeti Adatvédelmi és Információszabadság Hatóságnál
-          (NAIH, 1055 Budapest, Falk Miksa utca 9-11., posta: 1363 Budapest, Pf. 9.,
-          e-mail: ugyfelszolgalat@naih.hu), illetve bírósághoz is fordulhat.
-        </p>
-
-        <h3>10. Adatbiztonság</h3>
-        <p>
-          Az adatokhoz való hozzáférést a szükséges körre korlátozzuk, és a tárhely
-          szolgáltatónál elérhető technikai védelmi megoldásokat alkalmazzuk. A weboldal
-          HTTPS protokollon keresztül érhető el.
-        </p>
-
-        <h3>11. A tájékoztató módosítása</h3>
-        <p>
-          A tájékoztatót szükség szerint módosítjuk. A hatályos változat mindig ezen az
-          oldalon érhető el. Utolsó módosítás: <span class="ph">DATUM</span>.
-        </p>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================ COOKIE TÁJÉKOZTATÓ ====================== -->
-  <section class="section" id="cookie-tajekoztato">
-    <div class="container">
-      <div class="section-head">
-        <p class="eyebrow">Cookie-k</p>
-        <h2>Cookie tájékoztató</h2>
-        <p>
-          Ez az oldal a működéséhez szükséges technikai tárolást használ, a mérési
-          technológiákat pedig kizárólag hozzájárulás esetén aktiválja.
-        </p>
-      </div>
-
-      <div class="legal">
-
-        <h3>1. Szükséges technikai tárolás</h3>
-        <p>
-          A weboldal megjelenítéséhez és biztonságos működéséhez szükséges technikai
-          tárolás hozzájárulás nélkül is működik. Ez nem szolgál hirdetési vagy
-          statisztikai célt.
-        </p>
-
-        <h3>2. A hozzájárulás állapotának tárolása</h3>
-        <p>
-          A cookie-kkal kapcsolatos döntését a böngészője helyi tárolójában
-          (<code>localStorage</code>, kulcs: <code>lom_consent_v1</code>) tároljuk, hogy
-          ne kelljen minden látogatásnál újra megválaszolnia a kérdést. Ez az adat a saját
-          böngészőjében marad, és bármikor módosítható.
-        </p>
-
-        <h3>3. Google Ads mérési technológia</h3>
-        <p>
-          A weboldal Google Ads keresési kampányhoz készült. A hirdetés hatékonyságának
-          mérésére a Google gtag.js megoldását használjuk (Google Ireland Limited).
-          A mérés a Google Consent Mode v2 rendszerén keresztül működik: hozzájárulás
-          nélkül a hirdetési (<code>ad_storage</code>, <code>ad_user_data</code>,
-          <code>ad_personalization</code>) és statisztikai
-          (<code>analytics_storage</code>) tárolás tiltott állapotban van.
-        </p>
-
-        <h3>4. Kategóriák</h3>
-        <table class="legal__table">
-          <thead>
-            <tr><th>Kategória</th><th>Cél</th><th>Hozzájárulás</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Szükséges</td>
-              <td>A weboldal megjelenítése, biztonság, a hozzájárulási döntés megjegyzése.</td>
-              <td>Nem igényel hozzájárulást.</td>
-            </tr>
-            <tr>
-              <td>Statisztika</td>
-              <td>A látogatás mérése, az oldal használatának összesített elemzése.</td>
-              <td>Csak hozzájárulás esetén.</td>
-            </tr>
-            <tr>
-              <td>Marketing / hirdetés</td>
-              <td>Google Ads konverziómérés (telefonhívás, ajánlatkérés), hirdetési teljesítmény.</td>
-              <td>Csak hozzájárulás esetén.</td>
-            </tr>
-          </tbody>
-        </table>
-
-        <h3>5. A hozzájárulás módosítása vagy visszavonása</h3>
-        <p>
-          Döntését bármikor megváltoztathatja a
-          <button class="btn btn--link" type="button" data-consent-open>Cookie-beállítások</button>
-          megnyitásával, vagy a böngészőjében tárolt adatok törlésével. A visszavonás
-          nem érinti a korábbi, jogszerű adatkezelést.
-        </p>
-
-        <h3>6. Böngészőbeállítások</h3>
-        <p>
-          A cookie-k kezelése a böngésző beállításaiban is szabályozható. A szükséges
-          technikai tárolás letiltása esetén a weboldal egyes funkciói nem működnek
-          megfelelően.
-        </p>
-
-      </div>
     </div>
   </section>
 
@@ -1428,8 +1189,8 @@
 
         <h4 style="margin-top:1.5rem">Jogi információk</h4>
         <ul class="footer__list">
-          <li><a href="#adatkezeles">Adatkezelési tájékoztató</a></li>
-          <li><a href="#cookie-tajekoztato">Cookie tájékoztató</a></li>
+          <li><a href="/adatkezeles.html">Adatkezelési tájékoztató</a></li>
+          <li><a href="/cookie-tajekoztato.html">Cookie tájékoztató</a></li>
           <li><button type="button" data-consent-open>Cookie-beállítások</button></li>
         </ul>
       </div>
@@ -1464,7 +1225,7 @@
     <p>
       A weboldal működéséhez szükséges technikai tárolást használunk. Hirdetési és
       statisztikai mérést csak az Ön hozzájárulásával aktiválunk.
-      Részletek: <a href="#cookie-tajekoztato">Cookie tájékoztató</a>.
+      Részletek: <a href="/cookie-tajekoztato.html">Cookie tájékoztató</a>.
     </p>
     <div class="cookie__actions">
       <button class="btn btn--call" type="button" data-consent-accept>Elfogadom</button>
@@ -1485,6 +1246,7 @@
     <h2 id="consent-modal-title">Cookie-beállítások</h2>
     <p class="modal__intro">
       Válassza ki, mely kategóriákat engedélyezi. A döntés bármikor módosítható.
+      Részletek: <a href="/cookie-tajekoztato.html">Cookie tájékoztató</a>.
     </p>
 
     <div class="consent-group consent-group--locked">

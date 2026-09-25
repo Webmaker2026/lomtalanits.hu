@@ -1141,7 +1141,8 @@ button { font: inherit; color: inherit; }
 .form-alert .icon { width: 20px; height: 20px; flex: 0 0 auto; margin-top: .1rem; }
 
 /* --------------------------------------------------------------------------
-   19. Jogi blokkok (adatkezelés, cookie) — az index.html része
+   19. Jogi blokkok — az adatkezeles.html és a cookie-tajekoztato.html
+       különálló oldalak törzse (a főoldal one-page landing marad)
    -------------------------------------------------------------------------- */
 .legal { max-width: 860px; font-size: .96rem; }
 .legal h3 {
@@ -1179,6 +1180,120 @@ button { font: inherit; color: inherit; }
   border: 1px solid var(--color-line);
 }
 .legal__table th { background: var(--color-bg-muted); font-weight: 700; }
+/* A tobb oszlopos tablazat min-content szelessege mobilon tulloghat a
+   viewporton; a burkolo sajat vizszintes gorgetest kap, igy a lap nem
+   szelesedik ki. */
+.legal__table-wrap {
+  overflow-x: auto;
+  margin: 0 0 1.2rem;
+  -webkit-overflow-scrolling: touch;
+}
+.legal__table-wrap .legal__table { margin-bottom: 0; }
+
+/* A külön jogi oldalakon a laptitulus h1, a szakaszcímek h2 szinten vannak;
+   a főoldalról ismerős h3-ritmust ugyanezzel a mérettel visszük tovább. */
+.legal h2 {
+  margin-top: 2rem;
+  font-size: 1.08rem;
+}
+.legal h2:first-of-type { margin-top: 0; }
+.legal code {
+  padding: .05rem .3rem;
+  background: var(--color-bg-muted);
+  border-radius: 3px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: .9em;
+}
+
+/* Fejléc visszalépő link. A .header__cta 900px alatt eltűnik; ez a link
+   minden szélességen látszik, mert ez a jogi oldal egyértelmű kiútja. */
+.header__back {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  flex: 0 0 auto;
+  min-height: 44px;
+  padding: .5rem .85rem;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, .26);
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color .16s var(--ease), border-color .16s var(--ease);
+}
+.header__back:hover,
+.header__back:focus-visible {
+  background: rgba(255, 255, 255, .1);
+  border-color: #fff;
+  color: #fff;
+}
+.header__back .icon { width: 18px; height: 18px; }
+
+/* Morzsamenü a fejléc alatt */
+.crumbs {
+  background: var(--color-bg-soft);
+  border-bottom: 1px solid var(--color-line);
+  font-size: .9rem;
+}
+.crumbs__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .4rem;
+  margin: 0;
+  padding: .7rem 0;
+  list-style: none;
+}
+.crumbs__list li { margin: 0; }
+.crumbs a { color: var(--color-text-soft); }
+.crumbs [aria-current="page"] { color: var(--color-text); font-weight: 600; }
+.crumbs__sep { color: var(--color-line-strong); }
+
+/* Tartalomjegyzék */
+.legal__toc {
+  max-width: 860px;
+  margin: 0 0 clamp(1.6rem, 3vw, 2.2rem);
+  padding: 1rem 1.2rem 1.1rem;
+  background: var(--color-bg-soft);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+}
+.legal__toc-title {
+  margin: 0 0 .5rem;
+  font-size: .82rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+.legal__toc ol {
+  columns: 2;
+  column-gap: 1.6rem;
+  margin: 0;
+  padding-left: 1.15rem;
+  font-size: .93rem;
+}
+.legal__toc li { margin: 0 0 .28rem; break-inside: avoid; }
+.legal__toc a { color: var(--color-text-soft); }
+@media (max-width: 599px) {
+  .legal__toc ol { columns: 1; }
+}
+
+/* Lezáró sáv: visszalépés a főoldalra és a másik jogi oldal */
+.legal-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .7rem 1.2rem;
+  max-width: 860px;
+  margin-top: clamp(2rem, 4vw, 2.8rem);
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--color-line);
+}
+.legal-foot .btn { flex: 0 0 auto; }
 
 /* --------------------------------------------------------------------------
    20. Footer

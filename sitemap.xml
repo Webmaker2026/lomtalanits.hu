@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  One-page weboldal: egyetlen indexelendő URL van.
-  A horgonyok (#szolgaltatasok, #arak, #gyik stb.) NEM külön URL-ek,
-  ezért nem szerepelnek itt. A /koszonjuk.html szándékosan kimarad
-  (noindex, follow).
+  A szolgáltatási tartalom egyetlen one-page URL: a horgonyok
+  (#szolgaltatasok, #arak, #gyik stb.) NEM külön URL-ek, ezért nem
+  szerepelnek itt. A jogi tájékoztatók viszont önálló, indexelendő
+  oldalak, ezért benne vannak.
+  A /koszonjuk.html szándékosan kimarad (noindex, follow).
   A <lastmod> értéket élesítéskor, illetve nagyobb tartalmi módosításkor frissítsd.
 -->
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -12,5 +13,17 @@
     <lastmod>2026-09-25</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://lomtalanits.hu/adatkezeles.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
+  </url>
+  <url>
+    <loc>https://lomtalanits.hu/cookie-tajekoztato.html</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.3</priority>
   </url>
 </urlset>
